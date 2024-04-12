@@ -148,7 +148,6 @@ export default function App() {
             {configsButton}
           </>
         )}
-        {layout === "vr"}
         <Routes>
           {getRoutes(routes)}
           <Route path="*" element={<Navigate to="/dashboards/homepage" />} />
@@ -172,7 +171,6 @@ export default function App() {
           {configsButton}
         </>
       )}
-      {layout === "vr"}
       <Routes>
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/dashboards/homepage" />} />

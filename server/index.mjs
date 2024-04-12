@@ -69,14 +69,12 @@ app.use("/contact", (req, res) => {
     to: req.body.toEmail, //figure out actual destination
     subject: "Requesting More Info",
     body: req.body.body,
-  }
-  transporter.sendMail(options)
+  };
+  transporter.sendMail(options);
 });
 
 const determineSQLCredentials = (url) => {
-  // console.log("req.hostname", req.hostname);
-  //switch statement based on url
-  //const url = req.body.url.includes("localhost") ? "tish.property-genie.com" : req.body.url;
+
   if (url.includes("douglas.property-genie.com")) {
     return {
       user: "PG-DouglasNewUser",
@@ -546,7 +544,6 @@ const determineSQLCredentials = (url) => {
 };
 
 app.use("/ownerLogin", (req, res) => {
-  console.log("ownerLogin");
   const username = req.body.username;
   const password = req.body.password;
   const url = req.body.url;
@@ -564,8 +561,6 @@ app.use("/ownerLogin", (req, res) => {
               "'"
           )
           .then((dbData) => {
-            console.log("dbData", dbData);
-            console.log("dbData.recordset", dbData.output);
             if (dbData === null || dbData.length === null) {
               return;
             }
@@ -604,7 +599,6 @@ app.use("/tenantLogin", (req, res) => {
               "'"
           )
           .then((dbData) => {
-            console.log("dbData in tenantLogin", dbData);
             res.send(dbData);
           })
           .then(() => conn.close());
@@ -618,7 +612,6 @@ app.use("/tenantLogin", (req, res) => {
 });
 
 app.use("/ownerProperties", (req, res) => {
-  console.log("ownerProperties");
   const ownerID = req.body.ownerID;
   const url = req.body.url;
   const sqlConfig = determineSQLCredentials(url);
@@ -644,7 +637,6 @@ app.use("/ownerProperties", (req, res) => {
 });
 
 app.use("/ownerStatements", (req, res) => {
-  console.log("ownerStatements");
   const ownerID = req.body.ownerID;
   const url = req.body.url;
   const sqlConfig = determineSQLCredentials(url);
@@ -674,7 +666,6 @@ app.use("/ownerStatements", (req, res) => {
 });
 
 app.use("/ownerPropertyJournal", (req, res) => {
-  console.log("ownerPropertyJournal");
   const propertyID = req.body.propertyID;
   const startDate = req.body.startDate;
   const endDate = req.body.endDate;
@@ -803,7 +794,6 @@ app.use("/insertPayment", (req, res) => {
 });
 
 app.use("/getLicense", (req, res) => {
-  console.log("req.body.url", req.body.url);
   const url = req.body.url.includes("localhost") ? "tish.property-genie.com" : req.body.url;
   if (url != null) {
     try {
@@ -833,8 +823,6 @@ app.use("/makePayment", (req, res) => {
   const ownerID = isOwner ? req.body.ownerID : null;
   const tenantID = !isOwner ? req.body.tenantID : null;
   const date = dayjs().format("YYYY-MM-DD HH:mm:ss.SSS");
-
-  console.log("req", req.body);
 
   try {
     if (ownerID != null) {
@@ -896,8 +884,6 @@ app.use("/makePayment", (req, res) => {
 app.use("/availableProperties", (req, res) => {
   const url = req.body.url;
   const sqlConfig = determineSQLCredentials(url);
-  console.log("url", url);
-  console.log("sqlConfig", sqlConfig);
   try {
     sql.connect(sqlConfig).then((conn) => {
       conn

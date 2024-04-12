@@ -6,6 +6,7 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 PRO React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import BookingCard from "examples/Cards/BookingCard";
 
 import React, { useEffect, useState } from "react";
@@ -177,6 +178,7 @@ function Homepage() {
   // else {
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <MDBox>
         <MDBox p={1}>
           <InputLabel>Search Filters:</InputLabel>
